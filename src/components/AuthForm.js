@@ -13,7 +13,7 @@ const dispatch = useDispatch()
 		password: Yup.string().typeError('Должно быть строкой').required('Поле обязательно')
 	})
 
-	const handleSubmit =(values) => {
+	const handleSubmit = (values) => {
 
 
 	firebase.auth().signInWithEmailAndPassword(values.email, values.password)
@@ -31,7 +31,11 @@ const dispatch = useDispatch()
 				email: data.user.email
 			}
 			localStorage.setItem('user', JSON.stringify(loggedInUser));
-			dispatch(logIn(values.email, values.password));
+			dispatch(logIn({
+				firstName: values.firstName,
+				secondName: values.secondName,
+				email: values.email
+			}));
 		})
 
 

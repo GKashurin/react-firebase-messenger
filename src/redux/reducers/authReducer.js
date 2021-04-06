@@ -2,7 +2,7 @@ import {FETCH_USERS_FAILURE, FETCH_USERS_SUCCESS, LOG_IN, LOG_OUT} from "../acti
 
 const initialState = {
 	firstName: '',
-	lastName: '',
+	secondName: '',
 	email: '',
 	isLoggedIn: false,
 	error: null,
@@ -15,7 +15,7 @@ export const authReducer = (state = initialState, action) => {
 		case LOG_IN: {
 			return {
 				...state,
-				...action.payload.user,
+				...action.payload,
 				isLoggedIn: true,
 			}
 		}

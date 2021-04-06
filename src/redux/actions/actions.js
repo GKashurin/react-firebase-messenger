@@ -3,7 +3,10 @@ import firebase from "firebase";
 export const LOG_IN = "LOG_IN";
 export const LOG_OUT = "LOG_OUT";
 
-export const logIn = (user) => ({ type: LOG_IN, payload: user});
+export const logIn = (values) => ({ type: LOG_IN, payload: {
+		firstName: values.firstName,
+		secondName: values.secondName,
+		email: values.email }});
 export const logOut = () => ({ type: LOG_OUT });
 
 export const FETCH_USERS_SUCCESS = 'FETCH_USERS_SUCCESS'
