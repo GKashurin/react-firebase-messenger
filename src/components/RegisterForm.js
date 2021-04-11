@@ -2,63 +2,25 @@ import React from "react";
 import * as Yup from "yup";
 import {Formik} from "formik";
 import {useDispatch} from "react-redux";
-import {logIn, signUpFirebase} from "../redux/actions/actions";
-import firebase from "firebase";
+import {signUpFirebase} from "../redux/actions/authActions";
 
 const RegisterForm = () => {
 
 	const dispatch = useDispatch()
 	const validationSchema = Yup.object().shape({
-		name: Yup.string().typeError('Должно быть строкой').required('Поле обязательно'),
+		firstName: Yup.string().typeError('Должно быть строкой').required('Поле обязательно'),
 		secondName: Yup.string().typeError('Должно быть строкой').required('Поле обязательно'),
 		email: Yup.string().email('Введите верный email').required('Поле обязательно'),
 		password: Yup.string().typeError('Должно быть строкой').required('Поле обязательно')
 	})
 
 	const handleSubmit = (values) => {
-			firebase.auth()
-		.createUserWithEmailAndPassword(values.email, values.password)
-		.then(data => {
-			console.log(data)
-			const currentUser = firebase.auth().currentUser
-			const name = `${values.name} ${values.secondName}`;
-			console.log(name);
-			currentUser.updateProfile({
-				displayName: name
-			})
-				.then(() => {
-					firebase.firestore().collection("users")
-						.doc((data.user.uid))
-						.set({
-							name: values.name,
-							secondName: values.secondName,
-							uid: data.user.uid,
-							createdAt: new Date(),
-							isOnline: true
-						})
-						.then(() => {
-/////////////////////////
-							const loggedInUser = {
-								name: values.name,
-								secondName: values.secondName,
-								uid: data.user.uid,
-								email: values.email
-							}
-							//////////////////
-							localStorage.setItem('user', JSON.stringify(loggedInUser));
-							console.log(loggedInUser)
-							console.log('Регистрация прошла успешно...!');
-							dispatch(logIn(values.email, values.password))
-						})
-						.catch(error => console.log(error))
-				})
-		})
-		.catch(error => console.log(error))
+		dispatch(signUpFirebase(values))
 	}
 
 	return (
 		<Formik initialValues={{
-			name: '',
+			firstName: '',
 			secondName: '',
 			email: '',
 			password: ''
@@ -84,13 +46,13 @@ const RegisterForm = () => {
 						<input
 							className={'input'}
 							type='text'
-							name='name'
+							name='firstName'
 							onChange={handleChange}
 							onBlur={handleBlur}
-							value={values.name}
+							value={values.firstName}
 						/>
 					</p>
-					{touched.name && errors.name && <p className={'error'}>{errors.name}</p>}
+					{touched.firstName && errors.firstName && <p className={'error'}>{errors.firstName}</p>}
 
 					<p>
 						<input

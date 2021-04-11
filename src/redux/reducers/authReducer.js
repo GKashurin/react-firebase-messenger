@@ -1,4 +1,4 @@
-import {FETCH_USERS_FAILURE, FETCH_USERS_SUCCESS, LOG_IN, LOG_OUT} from "../actions/actions";
+import {FETCH_USERS_FAILURE, LOG_IN, LOG_OUT} from "../actions/authActions";
 
 const initialState = {
 	firstName: '',
@@ -6,10 +6,10 @@ const initialState = {
 	email: '',
 	isLoggedIn: false,
 	error: null,
+	uid: ''
 };
 
 export const authReducer = (state = initialState, action) => {
-	console.log(action)
 
 	switch (action.type) {
 		case LOG_IN: {
@@ -19,16 +19,11 @@ export const authReducer = (state = initialState, action) => {
 				isLoggedIn: true,
 			}
 		}
-		case FETCH_USERS_SUCCESS: {
-			return {
-				...state,
-				isLoggedIn: true
-			}
-		}
+
 		case FETCH_USERS_FAILURE: {
 			return {
 				...state,
-				error: action.payload.error
+				error: action.payload
 			}
 		}
 		case LOG_OUT: {
