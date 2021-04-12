@@ -9,10 +9,7 @@ const Login = () => {
 if (auth) {
 	return <Redirect to={'/chat'}/>
 }
-
-
 	return (
-
 		<div className="loginContainer">
 			<LoginForm/>
 		</div>

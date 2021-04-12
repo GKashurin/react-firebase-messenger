@@ -3,7 +3,6 @@ import RegisterForm from "../components/RegisterForm";
 import {useSelector} from "react-redux";
 import {Redirect} from "react-router-dom";
 
-
 const Register = () => {
 	const auth = useSelector(state => state.auth.isLoggedIn)
 

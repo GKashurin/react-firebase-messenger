@@ -88,10 +88,10 @@
   width: 10px;
   height: 10px;
   background: #16e316;
-  border-radius: 5px;
+  border-radius: 50%;
   box-shadow: 0 0 10px 0 #16e316;
 }
 .onlineStatus.off {
-  background: green;
+  background: grey;
   box-shadow: 0 0 0 0;
 }

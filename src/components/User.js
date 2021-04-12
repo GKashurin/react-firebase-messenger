@@ -4,10 +4,7 @@ const User = ({user, onClick}) => {
 
 	return (
 		<div onClick={() => onClick(user)} className="displayName">
-			<div
-				className="displayPic"
-				style={{width: '48px', height: '48px'}}
-			>
+			<div className="displayPic">
 				<img src="https://klike.net/uploads/posts/2019-07/1564314059_1.jpg" alt="avatar" />
 			</div>
 			<div style={{
@@ -17,7 +14,7 @@ const User = ({user, onClick}) => {
 				margin: '0 10px'
 			}}>
 				<span style={{fontWeight: 500}}>{user.firstName} {user.secondName}</span>
-				<span>{user.isOnline ? 'online' : 'offline'}</span>
+				<span className={user.isOnline ? 'onlineStatus' : 'onlineStatus off'}></span>
 			</div>
 		</div>
 	)
